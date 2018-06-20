@@ -35,4 +35,5 @@ ext {
     // Library versions
     supportLibVersion = '27.1.1'
     butterKnifeVersion = '8.8.1'
+    gsonVersion = '2.8.5'
 }
