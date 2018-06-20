@@ -1,5 +1,6 @@
 package com.android.kakashi.bakingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,8 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -31,12 +34,12 @@ public class RecipeListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         ButterKnife.bind(this, view);
 
-        String[] values = new String[20];
+        final String[] values = new String[20];
         for (int i = 0; i < values.length; i++) {
             values[i] = "Recipe Item #" + (i + 1);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 Objects.requireNonNull(getActivity()),
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
@@ -44,6 +47,20 @@ public class RecipeListFragment extends Fragment {
         );
 
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(
+                        getActivity(),
+                        "Item at " + position + " position clicked",
+                        Toast.LENGTH_SHORT
+                ).show();
+
+                Intent fireRecipeActivity = RecipeActivity.startActivity(getActivity(), values[position]);
+                startActivity(fireRecipeActivity);
+            }
+        });
 
         return view;
     }
