@@ -4,18 +4,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipeListFragment extends Fragment {
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
+    @BindView(R.id.list_view)
+    ListView listView;
 
     public static RecipeListFragment newInstance() {
         // vanilla for now
@@ -29,9 +31,19 @@ public class RecipeListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         ButterKnife.bind(this, view);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(null);
+        String[] values = new String[20];
+        for (int i = 0; i < values.length; i++) {
+            values[i] = "Recipe Item #" + (i + 1);
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                Objects.requireNonNull(getActivity()),
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                values
+        );
+
+        listView.setAdapter(adapter);
 
         return view;
     }
