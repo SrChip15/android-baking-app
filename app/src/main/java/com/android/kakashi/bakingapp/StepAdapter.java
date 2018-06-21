@@ -8,12 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
-
-    private static final int MAX_INITIAL_CAPACITY = 15;
 
     private OnItemClickListener itemClickListener;
 
@@ -45,17 +42,13 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
     }
 
     private Context context;
-    private List<String> data = new ArrayList<>(MAX_INITIAL_CAPACITY);
+    private List<String> data;
 
     @SuppressWarnings("WeakerAccess")
     public StepAdapter(Context context, OnItemClickListener itemClickListener) {
         this.context = context;
         this.itemClickListener = itemClickListener;
-
-        // test data
-        for (int i = 0; i < 11 /* for demo purpose */; i++) {
-            data.add("Step #" + (i + 1));
-        }
+        data = MockData.getData();
     }
 
     @NonNull
