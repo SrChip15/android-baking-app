@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -34,6 +33,7 @@ public class RecipeListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         ButterKnife.bind(this, view);
 
+        // test data
         final String[] values = new String[20];
         for (int i = 0; i < values.length; i++) {
             values[i] = "Recipe Item #" + (i + 1);
@@ -51,11 +51,11 @@ public class RecipeListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(
+                /*Toast.makeText(
                         getActivity(),
                         "Item at " + position + " position clicked",
                         Toast.LENGTH_SHORT
-                ).show();
+                ).show();*/
 
                 Intent fireRecipeActivity = RecipeActivity.startActivity(getActivity(), values[position]);
                 startActivity(fireRecipeActivity);
