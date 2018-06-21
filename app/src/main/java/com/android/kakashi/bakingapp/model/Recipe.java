@@ -1,3 +1,4 @@
+/* Created using jsonschema2pojo.org */
 
 package com.android.kakashi.bakingapp.model;
 
