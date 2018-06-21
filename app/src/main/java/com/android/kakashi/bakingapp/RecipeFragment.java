@@ -10,11 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.kakashi.bakingapp.StepAdapter.OnItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecipeFragment extends Fragment {
+public class RecipeFragment
+        extends Fragment
+        implements OnItemClickListener {
+
     @BindView(R.id.ingredients_tv)
     TextView ingredientsTextView;
     @BindView(R.id.steps_rv)
@@ -39,9 +45,18 @@ public class RecipeFragment extends Fragment {
         stepsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false));
 
-        StepAdapter stepAdapter = new StepAdapter(getActivity());
+        StepAdapter stepAdapter = new StepAdapter(getActivity(), this);
         stepsRecyclerView.setAdapter(stepAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+        Toast.makeText(
+                getActivity(),
+                "Step #" + (position + 1) + " clicked!",
+                Toast.LENGTH_SHORT
+        ).show();
     }
 }
