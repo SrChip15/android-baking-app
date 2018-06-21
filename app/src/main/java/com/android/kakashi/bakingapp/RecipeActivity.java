@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
+import com.android.kakashi.bakingapp.ui.RecipeFragment;
+
 import timber.log.Timber;
 
 public class RecipeActivity extends ModularBaseActivity {

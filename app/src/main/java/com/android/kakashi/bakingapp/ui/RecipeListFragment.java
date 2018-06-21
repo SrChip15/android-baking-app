@@ -1,4 +1,4 @@
-package com.android.kakashi.bakingapp;
+package com.android.kakashi.bakingapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.android.kakashi.bakingapp.R;
+import com.android.kakashi.bakingapp.RecipeActivity;
 
 import java.util.Objects;
 

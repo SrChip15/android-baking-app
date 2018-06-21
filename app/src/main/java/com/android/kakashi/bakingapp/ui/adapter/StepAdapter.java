@@ -1,4 +1,4 @@
-package com.android.kakashi.bakingapp;
+package com.android.kakashi.bakingapp.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.android.kakashi.bakingapp.MockData;
 
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
     static class StepHolder
             extends RecyclerView.ViewHolder
             implements View.OnClickListener {
+
         TextView stepShortDescriptionTextView;
         OnItemClickListener itemClickListener;
 

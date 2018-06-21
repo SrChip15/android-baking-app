@@ -1,4 +1,4 @@
-package com.android.kakashi.bakingapp;
+package com.android.kakashi.bakingapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.kakashi.bakingapp.StepAdapter.OnItemClickListener;
+import com.android.kakashi.bakingapp.R;
+import com.android.kakashi.bakingapp.ui.adapter.StepAdapter;
+import com.android.kakashi.bakingapp.ui.adapter.StepAdapter.OnItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

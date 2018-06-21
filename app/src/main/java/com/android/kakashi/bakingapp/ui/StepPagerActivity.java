@@ -1,4 +1,4 @@
-package com.android.kakashi.bakingapp;
+package com.android.kakashi.bakingapp.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+
+import com.android.kakashi.bakingapp.MockData;
+import com.android.kakashi.bakingapp.R;
 
 import java.util.List;
 
