@@ -1,6 +1,6 @@
 /* Created using jsonschema2pojo.org */
 
-package com.android.kakashi.bakingapp.model;
+package com.android.kakashi.bakingapp.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
