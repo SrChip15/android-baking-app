@@ -21,4 +21,9 @@ public class RecipeActivity extends ModularBaseActivity {
     public Fragment getFragment() {
         return RecipeFragment.newInstance(getIntent().getIntExtra(EXTRA_RECIPE_INDEX, -1));
     }
+
+    @SuppressWarnings("ConstantConditions")
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
 }

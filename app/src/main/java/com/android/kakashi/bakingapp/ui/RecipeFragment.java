@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.kakashi.bakingapp.R;
+import com.android.kakashi.bakingapp.RecipeActivity;
 import com.android.kakashi.bakingapp.data.model.Ingredient;
 import com.android.kakashi.bakingapp.data.model.Recipe;
 import com.android.kakashi.bakingapp.data.network.NetworkModule;
@@ -67,6 +68,9 @@ public class RecipeFragment
 
         if (recipeIndex != INVALID_INDEX) {
             Recipe recipe = recipes.get(recipeIndex);
+            //noinspection ConstantConditions
+            ((RecipeActivity)getActivity()).setActionBarTitle(recipe.getName());
+
             List<Ingredient> ingredients = recipe.getIngredients();
             for (int i = 0; i < ingredients.size(); i++) {
                 Ingredient ingredient = ingredients.get(i);
