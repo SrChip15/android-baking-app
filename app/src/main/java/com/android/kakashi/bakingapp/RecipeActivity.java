@@ -6,18 +6,19 @@ import android.support.v4.app.Fragment;
 
 import com.android.kakashi.bakingapp.ui.RecipeFragment;
 
-import timber.log.Timber;
-
 public class RecipeActivity extends ModularBaseActivity {
-    public static Intent startActivity(Context packageContext, String itemClicked) {
+
+    private static final String EXTRA_RECIPE_INDEX = "com.android.kakashi.bakingapp.extra_recipe_index";
+
+    public static Intent startActivity(Context packageContext, int recipePosition) {
         Intent intent = new Intent(packageContext, RecipeActivity.class);
-        Timber.i("Passed-in value = %s", itemClicked);
+        intent.putExtra(EXTRA_RECIPE_INDEX, recipePosition);
 
         return intent;
     }
 
     @Override
     public Fragment getFragment() {
-        return RecipeFragment.newInstance();
+        return RecipeFragment.newInstance(getIntent().getIntExtra(EXTRA_RECIPE_INDEX, -1));
     }
 }
