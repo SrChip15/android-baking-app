@@ -11,11 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.kakashi.bakingapp.R;
+import com.android.kakashi.bakingapp.data.model.Ingredient;
+import com.android.kakashi.bakingapp.data.model.Recipe;
+import com.android.kakashi.bakingapp.data.network.NetworkModule;
 import com.android.kakashi.bakingapp.ui.adapter.StepAdapter;
 import com.android.kakashi.bakingapp.ui.adapter.StepAdapter.OnItemClickListener;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,10 +32,30 @@ public class RecipeFragment
     TextView ingredientsTextView;
     @BindView(R.id.steps_rv)
     RecyclerView stepsRecyclerView;
+    private int recipeIndex;
+    private List<Recipe> recipes;
 
-    public static RecipeFragment newInstance() {
-        // vanilla for now
-        return new RecipeFragment();
+    private static final String ARG_RECIPE_INDEX = "recipeIndex";
+    private static final int INVALID_INDEX = -1;
+
+    public static RecipeFragment newInstance(int recipeIndex) {
+        Bundle args = new Bundle();
+        args.putInt(ARG_RECIPE_INDEX, recipeIndex);
+
+        RecipeFragment fragment = new RecipeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        recipes = NetworkModule.getInstance().getRecipes();
+        if (getArguments() != null) {
+            recipeIndex = getArguments().getInt(ARG_RECIPE_INDEX);
+        } else {
+            throw new IllegalArgumentException("ERROR! Recipe position missing!");
+        }
     }
 
     @Nullable
@@ -41,27 +65,29 @@ public class RecipeFragment
         View view = inflater.inflate(R.layout.fragment_recipe, container, false);
         ButterKnife.bind(this, view);
 
-        String heading = "Ingredients".toUpperCase();
-        ingredientsTextView.setText(heading);
+        if (recipeIndex != INVALID_INDEX) {
+            Recipe recipe = recipes.get(recipeIndex);
+            List<Ingredient> ingredients = recipe.getIngredients();
+            for (int i = 0; i < ingredients.size(); i++) {
+                Ingredient ingredient = ingredients.get(i);
+                String name = ingredient.getIngredient();
+                float quantity = ingredient.getQuantity();
+                ingredientsTextView.append(getString(R.string.ingredients_line_item, name, quantity));
+            }
 
-        stepsRecyclerView.setHasFixedSize(true);
-        stepsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL, false));
+            stepsRecyclerView.setHasFixedSize(true);
+            stepsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
+                    LinearLayoutManager.VERTICAL, false));
 
-        StepAdapter stepAdapter = new StepAdapter(getActivity(), this);
-        stepsRecyclerView.setAdapter(stepAdapter);
+            StepAdapter stepAdapter = new StepAdapter(getActivity(), this, recipe.getSteps());
+            stepsRecyclerView.setAdapter(stepAdapter);
+        }
 
         return view;
     }
 
     @Override
     public void onItemClicked(int position) {
-        Toast.makeText(
-                getActivity(),
-                "Step #" + (position + 1) + " clicked!",
-                Toast.LENGTH_SHORT
-        ).show();
-
         Intent stepPager = StepPagerActivity.start(getActivity(), position);
         startActivity(stepPager);
     }

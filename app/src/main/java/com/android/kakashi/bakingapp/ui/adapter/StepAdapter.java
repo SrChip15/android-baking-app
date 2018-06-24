@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.kakashi.bakingapp.MockData;
+import com.android.kakashi.bakingapp.data.model.Step;
 
 import java.util.List;
 
@@ -45,13 +45,13 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
     }
 
     private Context context;
-    private List<String> data;
+    private List<Step> data;
 
     @SuppressWarnings("WeakerAccess")
-    public StepAdapter(Context context, OnItemClickListener itemClickListener) {
+    public StepAdapter(Context context, OnItemClickListener itemClickListener, List<Step> data) {
         this.context = context;
         this.itemClickListener = itemClickListener;
-        data = MockData.getData();
+        this.data = data;
     }
 
     @NonNull
@@ -65,8 +65,9 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull StepHolder holder, int position) {
-        String textAtPositionFromTestData = data.get(position);
-        holder.bind(textAtPositionFromTestData);
+        //String textAtPositionFromTestData = data.get(position);
+        Step current = data.get(position);
+        holder.bind(current.getShortDescription());
     }
 
     @Override
