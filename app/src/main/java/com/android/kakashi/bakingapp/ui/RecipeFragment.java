@@ -1,13 +1,16 @@
 package com.android.kakashi.bakingapp.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -51,12 +54,34 @@ public class RecipeFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true); // handle activity up navigation
+
         recipes = NetworkModule.getInstance().getRecipes();
+
         if (getArguments() != null) {
             recipeIndex = getArguments().getInt(ARG_RECIPE_INDEX);
         } else {
             throw new IllegalArgumentException("ERROR! Recipe position missing!");
         }
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ((RecipeActivity)getActivity()).setHomeAsUpEnabled(true);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(getActivity());
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Nullable
@@ -92,7 +117,7 @@ public class RecipeFragment
 
     @Override
     public void onItemClicked(int position) {
-        Intent stepPager = StepPagerActivity.start(getActivity(), position);
+        Intent stepPager = StepPagerActivity.start(getActivity(), position, recipeIndex);
         startActivity(stepPager);
     }
 }

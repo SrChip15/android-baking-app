@@ -19,11 +19,18 @@ public class RecipeActivity extends ModularBaseActivity {
 
     @Override
     public Fragment getFragment() {
-        return RecipeFragment.newInstance(getIntent().getIntExtra(EXTRA_RECIPE_INDEX, -1));
+        int recipeIndex = getIntent().getIntExtra(EXTRA_RECIPE_INDEX, -1);
+        return RecipeFragment.newInstance(recipeIndex);
+
     }
 
     @SuppressWarnings("ConstantConditions")
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public void setHomeAsUpEnabled(boolean showHomeAsUp) {
+        getSupportActionBar().setDisplayShowHomeEnabled(showHomeAsUp);
     }
 }
