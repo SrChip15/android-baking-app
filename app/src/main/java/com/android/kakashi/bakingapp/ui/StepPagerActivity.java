@@ -11,9 +11,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.android.kakashi.bakingapp.MockData;
 import com.android.kakashi.bakingapp.R;
 import com.android.kakashi.bakingapp.RecipeActivity;
+import com.android.kakashi.bakingapp.data.model.Recipe;
+import com.android.kakashi.bakingapp.data.model.Step;
+import com.android.kakashi.bakingapp.data.network.NetworkModule;
 
 import java.util.List;
 
@@ -45,17 +47,21 @@ public class StepPagerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
 
-        int currentIndex = getIntent().getIntExtra(EXTRA_STEP_INDEX, 0);
+        final int currentIndex = getIntent().getIntExtra(EXTRA_STEP_INDEX, 0);
         recipeIndex = getIntent().getIntExtra(EXTRA_RECIPE_INDEX, -1);
 
-        final List<String> steps = MockData.getData();
+        List<Recipe> recipes = NetworkModule.getInstance().getRecipes();
+        Recipe currentRecipe = recipes.get(recipeIndex);
+        final List<Step> steps = currentRecipe.getSteps();
+
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         stepPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
+
             @Override
             public Fragment getItem(int position) {
-                String step = steps.get(position);
-                return StepFragment.newInstance(step);
+                Step current = steps.get(position);
+                return StepFragment.newInstance(current);
             }
 
             @Override

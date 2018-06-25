@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.kakashi.bakingapp.R;
+import com.android.kakashi.bakingapp.data.model.Step;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,13 +19,13 @@ public class StepFragment extends Fragment {
 
     @BindView(R.id.step_description_tv)
     TextView stepDescriptionTextView;
-    private String shortDescription;
+    private Step step;
 
-    private static final String ARG_SHORT_DESC = "stepShortDescription";
+    private static final String ARG_STEP = "step";
 
-    public static StepFragment newInstance(String description) {
+    public static StepFragment newInstance(Step currentStep) {
         Bundle args = new Bundle();
-        args.putString(ARG_SHORT_DESC, description);
+        args.putParcelable(ARG_STEP, currentStep);
 
         StepFragment fragment = new StepFragment();
         fragment.setArguments(args);
@@ -36,7 +37,7 @@ public class StepFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            shortDescription = getArguments().getString(ARG_SHORT_DESC);
+            step = getArguments().getParcelable(ARG_STEP);
         } else {
             throw new IllegalArgumentException("Expected step argument missing!");
         }
@@ -49,7 +50,8 @@ public class StepFragment extends Fragment {
         View view = inflater.inflate(R.layout.list_item_step, container, false);
         ButterKnife.bind(this, view);
 
-        stepDescriptionTextView.setText(shortDescription);
+        String description = step.getDescription();
+        stepDescriptionTextView.setText(description);
 
         return view;
     }
