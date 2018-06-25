@@ -34,4 +34,9 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$timberVersion"
 
     implementation "com.google.code.gson:gson:$gsonVersion"
+
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoPlayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-hls:$exoPlayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoPlayerVersion"
+    implementation "com.google.android.exoplayer:exoplayer-smoothstreaming:$exoPlayerVersion"
 }
