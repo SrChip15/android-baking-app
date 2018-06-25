@@ -22,7 +22,9 @@
         <activity
             android:name=".RecipeActivity"
             android:parentActivityName=".RecipeListActivity" />
-        <activity android:name=".ui.StepPagerActivity" />
+        <activity
+            android:name=".ui.StepPagerActivity"
+            android:parentActivityName=".RecipeActivity" />
     </application>
 
 </manifest>
