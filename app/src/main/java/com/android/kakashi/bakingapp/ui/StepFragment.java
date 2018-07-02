@@ -64,8 +64,7 @@ public class StepFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (Util.SDK_INT > 23) {
-            handlePlayerVisibility();
-            initializePlayer();
+            setVideoPlayer();
         }
     }
     
@@ -73,14 +72,14 @@ public class StepFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if ((Util.SDK_INT <= 23 || player == null)) {
-            handlePlayerVisibility();
-            initializePlayer();
+            setVideoPlayer();
         }
     }
     
-    private void handlePlayerVisibility() {
+    private void setVideoPlayer() {
         if (step.getVideoURL().length() > 0) {
             playerView.setVisibility(View.VISIBLE);
+            initializePlayer();
         } else {
             // video url absent; remove player from view
             playerView.setVisibility(View.GONE);
@@ -118,7 +117,7 @@ public class StepFragment extends Fragment {
             MediaSource mediaSource = buildMediaSource();
             
             player.prepare(mediaSource);
-            player.setPlayWhenReady(true);
+            //player.setPlayWhenReady(true);
             
         }
     }
