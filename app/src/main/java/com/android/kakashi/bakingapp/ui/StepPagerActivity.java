@@ -23,22 +23,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class StepPagerActivity extends AppCompatActivity {
-
+    
     @BindView(R.id.pager)
     ViewPager stepPager;
     private int recipeIndex;
-
+    
     private static final String EXTRA_STEP_INDEX = "com.android.kakashi.bakingapp.step_index";
     private static final String EXTRA_RECIPE_INDEX = "com.android.kakashi.bakingapp.recipe_index";
-
+    
     public static Intent start(Context packageContext, int currentIndex, int recipeIndex) {
         Intent intent = new Intent(packageContext, StepPagerActivity.class);
         intent.putExtra(EXTRA_STEP_INDEX, currentIndex);
         intent.putExtra(EXTRA_RECIPE_INDEX, recipeIndex);
-
+        
         return intent;
     }
-
+    
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,33 +46,34 @@ public class StepPagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_step_pager);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ButterKnife.bind(this);
-
+        
         final int currentIndex = getIntent().getIntExtra(EXTRA_STEP_INDEX, 0);
         recipeIndex = getIntent().getIntExtra(EXTRA_RECIPE_INDEX, -1);
-
+        
         List<Recipe> recipes = NetworkModule.getInstance().getRecipes();
         Recipe currentRecipe = recipes.get(recipeIndex);
+        getSupportActionBar().setTitle(currentRecipe.getName());
         final List<Step> steps = currentRecipe.getSteps();
-
+        
         FragmentManager fragmentManager = getSupportFragmentManager();
-
+        
         stepPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
-
+            
             @Override
             public Fragment getItem(int position) {
                 Step current = steps.get(position);
                 return StepFragment.newInstance(current);
             }
-
+            
             @Override
             public int getCount() {
                 return steps.size();
             }
         });
-
+        
         stepPager.setCurrentItem(currentIndex);
     }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
