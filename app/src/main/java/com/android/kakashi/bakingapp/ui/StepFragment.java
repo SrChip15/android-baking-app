@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.kakashi.bakingapp.R;
@@ -93,6 +94,15 @@ public class StepFragment extends Fragment {
         View view = inflater.inflate(R.layout.list_item_step, container, false);
         ButterKnife.bind(this, view);
         
+        ImageButton replayButton = playerView.findViewById(R.id.exo_replay);
+        replayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.seekTo(0);
+                player.setPlayWhenReady(true);
+            }
+        });
+        
         String description = step.getDescription();
         stepDescriptionTextView.setText(description);
         
@@ -117,7 +127,6 @@ public class StepFragment extends Fragment {
             MediaSource mediaSource = buildMediaSource();
             
             player.prepare(mediaSource);
-            //player.setPlayWhenReady(true);
             
         }
     }
