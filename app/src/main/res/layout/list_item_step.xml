@@ -18,8 +18,8 @@
             android:layout_height="0dp"
             android:layout_margin="16dp"
             android:layout_weight="1"
-            app:fastforward_increment="15000"
-            app:rewind_increment="15000" />
+            app:fastforward_increment="2000"
+            app:rewind_increment="2000" />
 
         <TextView
             android:id="@+id/textView"
