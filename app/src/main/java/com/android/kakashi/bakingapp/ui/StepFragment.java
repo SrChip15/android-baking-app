@@ -123,6 +123,7 @@ public class StepFragment extends Fragment {
             );
     
             playerView.setPlayer(player);
+            playerView.setControllerShowTimeoutMs(1000);
     
             MediaSource mediaSource = buildMediaSource();
             
