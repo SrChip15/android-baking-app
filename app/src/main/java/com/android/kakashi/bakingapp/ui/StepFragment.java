@@ -54,6 +54,8 @@ public class StepFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+        
         if (getArguments() != null) {
             step = getArguments().getParcelable(ARG_STEP);
         } else {
@@ -121,14 +123,17 @@ public class StepFragment extends Fragment {
                     trackSelector,
                     loadControl
             );
-    
+            
             playerView.setPlayer(player);
             playerView.setControllerShowTimeoutMs(1000);
-    
+            
             MediaSource mediaSource = buildMediaSource();
             
             player.prepare(mediaSource);
             
+        } else {
+            // Config change
+            playerView.setPlayer(player);
         }
     }
     
@@ -140,19 +145,25 @@ public class StepFragment extends Fragment {
                 .createMediaSource(uri);
     }
     
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onPause() {
         super.onPause();
         if (Util.SDK_INT <= 23) {
-            releasePlayer();
+            if (!getActivity().isChangingConfigurations()) {
+                releasePlayer();
+            }
         }
     }
     
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onStop() {
         super.onStop();
         if (Util.SDK_INT > 23) {
-            releasePlayer();
+            if (!getActivity().isChangingConfigurations()) {
+                releasePlayer();
+            }
         }
     }
     
