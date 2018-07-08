@@ -5,4 +5,6 @@
     <string name="steps_label">Steps</string>
     <string name="description_label_tv">Description</string>
     <string name="exo_controls_replay_description">Replay</string>
+    <string name="sample_text">Baking Widget</string>
+    <string name="widget_content_description">baking app widget</string>
 </resources>
