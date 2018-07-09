@@ -1,6 +1,7 @@
 package com.android.kakashi.bakingapp.data.network;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.Nullable;
 
 import com.android.kakashi.bakingapp.data.model.Recipe;
 import com.google.gson.Gson;
@@ -41,6 +42,7 @@ public final class NetworkModule {
         this.recipes = recipes;
     }
 
+    @Nullable
     public List<Recipe> getRecipes() {
         return recipes;
     }
