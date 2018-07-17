@@ -26,34 +26,49 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipeListFragment extends Fragment {
-
-    @BindView(R.id.list_view) ListView listView;
-    @SuppressWarnings("FieldCanBeLocal") private NetworkModule networkModule;
+    
+    @BindView(R.id.list_view)
+    ListView listView;
+    @SuppressWarnings("FieldCanBeLocal")
+    private NetworkModule networkModule;
     private RecipeListAdapter adapter;
-
-    public static RecipeListFragment newInstance() {
-        // vanilla for now
-        return new RecipeListFragment();
+    
+    private static final String KEY_HOST_ACTIVITY_CODE = "ActivityCode";
+    private static final String KEY_APP_WIDGET_ID = "AppWidgetId";
+    
+    public static RecipeListFragment newInstance(int activityCode, int appWidgetId) {
+        Bundle args = new Bundle();
+        args.putInt(KEY_HOST_ACTIVITY_CODE, activityCode);
+        args.putInt(KEY_APP_WIDGET_ID, appWidgetId);
+        
+        RecipeListFragment fragment = new RecipeListFragment();
+        fragment.setArguments(args);
+        
+        return fragment;
     }
     
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         networkModule = NetworkModule.getInstance();
-    
-        List<Recipe> recipes = new ArrayList<>();
-        if (networkModule.getRecipes() == null) {
-            adapter = new RecipeListAdapter(context, recipes);
+        
+        final int hostActivityCode = getArguments().getInt(KEY_HOST_ACTIVITY_CODE);
+        final int appWidgetId = getArguments().getInt(KEY_APP_WIDGET_ID);
+        /*if (networkModule.getRecipes() == null) {
+            adapter = new RecipeListAdapter(context, new ArrayList<Recipe>(), hostActivityCode);
         } else {
             adapter.setData(networkModule.getRecipes());
-        }
+        }*/
+        adapter = new RecipeListAdapter(context, new ArrayList<Recipe>(), hostActivityCode, appWidgetId);
+        adapter.setData(networkModule.getRecipes());
     }
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-    
+        
         new FetchRecipesTask(networkModule, adapter).execute();
     }
     
@@ -63,7 +78,7 @@ public class RecipeListFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         ButterKnife.bind(this, view);
-
+        
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,28 +87,28 @@ public class RecipeListFragment extends Fragment {
                 startActivity(fireRecipeActivity);
             }
         });
-
+        
         return view;
     }
     
     static class FetchRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
-
+        
         private NetworkModule networkModule;
         private RecipeListAdapter adapter;
-
+        
         FetchRecipesTask(NetworkModule networkModule, RecipeListAdapter adapter) {
             this.networkModule = networkModule;
             this.adapter = adapter;
         }
-
+        
         @Override
         protected List<Recipe> doInBackground(Void... voids) {
             List<Recipe> recipes = NetworkModule.fetchRecipes();
             networkModule.cacheData(recipes);
-
+            
             return recipes;
         }
-    
+        
         @Override
         protected void onPostExecute(List<Recipe> recipes) {
             adapter.setData(recipes);
