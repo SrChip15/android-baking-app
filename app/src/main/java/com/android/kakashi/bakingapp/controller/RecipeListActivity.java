@@ -1,4 +1,4 @@
-package com.android.kakashi.bakingapp;
+package com.android.kakashi.bakingapp.controller;
 
 import android.support.v4.app.Fragment;
 

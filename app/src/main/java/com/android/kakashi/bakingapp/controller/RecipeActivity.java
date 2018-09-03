@@ -1,4 +1,4 @@
-package com.android.kakashi.bakingapp;
+package com.android.kakashi.bakingapp.controller;
 
 import android.content.Context;
 import android.content.Intent;

@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
+import com.android.kakashi.bakingapp.controller.RecipeListActivity;
+
 public class RecipeWidgetProvider extends AppWidgetProvider {
     
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,

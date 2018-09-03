@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".RecipeListActivity">
+        <activity android:name=".controller.RecipeListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,11 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecipeActivity"
-            android:parentActivityName=".RecipeListActivity" />
+            android:name=".controller.RecipeActivity"
+            android:parentActivityName=".controller.RecipeListActivity" />
         <activity
             android:name=".ui.StepPagerActivity"
-            android:parentActivityName=".RecipeActivity" />
+            android:parentActivityName=".controller.RecipeActivity" />
 
         <receiver android:name=".RecipeWidgetProvider">
             <intent-filter>

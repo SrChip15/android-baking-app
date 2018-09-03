@@ -14,8 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.kakashi.bakingapp.R;
-import com.android.kakashi.bakingapp.RecipeActivity;
-import com.android.kakashi.bakingapp.RecipeListAdapter;
+import com.android.kakashi.bakingapp.controller.RecipeActivity;
+import com.android.kakashi.bakingapp.ui.adapter.RecipeListAdapter;
+import com.android.kakashi.bakingapp.ui.adapter.RecipeListAdapter.RecipeSelector;
 import com.android.kakashi.bakingapp.data.model.Recipe;
 import com.android.kakashi.bakingapp.data.network.NetworkModule;
 
@@ -25,7 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecipeListFragment extends Fragment {
+public class RecipeListFragment extends Fragment implements RecipeSelector {
     
     @BindView(R.id.list_view)
     ListView listView;
@@ -89,6 +90,11 @@ public class RecipeListFragment extends Fragment {
         });
         
         return view;
+    }
+    
+    @Override
+    public void onRecipeSelected() {
+        // get ingredients from current recipe, set on view and install widget on home screen
     }
     
     static class FetchRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {

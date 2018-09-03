@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.android.kakashi.bakingapp.controller.ModularBaseActivity;
 import com.android.kakashi.bakingapp.ui.RecipeListFragment;
 
 public class AppWidgetConfigActivity extends ModularBaseActivity {

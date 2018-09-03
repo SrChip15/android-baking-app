@@ -1,4 +1,4 @@
-package com.android.kakashi.bakingapp;
+package com.android.kakashi.bakingapp.ui.adapter;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
@@ -14,6 +14,9 @@ import android.widget.RadioButton;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
+import com.android.kakashi.bakingapp.AppWidgetConfigActivity;
+import com.android.kakashi.bakingapp.R;
+import com.android.kakashi.bakingapp.controller.RecipeListActivity;
 import com.android.kakashi.bakingapp.data.model.Ingredient;
 import com.android.kakashi.bakingapp.data.model.Recipe;
 
@@ -24,11 +27,16 @@ import static android.app.Activity.RESULT_OK;
 public class RecipeListAdapter extends ArrayAdapter<Recipe> {
     
     private LayoutInflater inflater;
-    @SuppressWarnings("unused") private List<Recipe> recipes;
+    private List<Recipe> recipes;
     @LayoutRes private int layoutResId = 0;
     private Context context;
     private int appWidgetId;
     private boolean isHostActivityAppWidgetConfig;
+    private RecipeSelector callback;
+    
+    public interface RecipeSelector {
+        void onRecipeSelected();
+    }
     
     public RecipeListAdapter(Context context, @NonNull List<Recipe> recipes,
                              @LayoutRes int activityCode, int appWidgetId) {
@@ -70,6 +78,7 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe> {
             view.recipeItemRadioButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    callback.onRecipeSelected();
                     AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
                     RemoteViews views = new RemoteViews(
                             context.getPackageName(),

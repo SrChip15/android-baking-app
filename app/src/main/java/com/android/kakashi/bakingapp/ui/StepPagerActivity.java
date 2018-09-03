@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.android.kakashi.bakingapp.R;
-import com.android.kakashi.bakingapp.RecipeActivity;
+import com.android.kakashi.bakingapp.controller.RecipeActivity;
 import com.android.kakashi.bakingapp.data.model.Recipe;
 import com.android.kakashi.bakingapp.data.model.Step;
 import com.android.kakashi.bakingapp.data.network.NetworkModule;
