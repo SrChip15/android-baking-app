@@ -1,5 +1,7 @@
 package com.android.kakashi.bakingapp.ui;
 
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.kakashi.bakingapp.R;
+import com.android.kakashi.bakingapp.RecipeListModel;
 import com.android.kakashi.bakingapp.controller.RecipeActivity;
 import com.android.kakashi.bakingapp.ui.adapter.RecipeListAdapter;
 import com.android.kakashi.bakingapp.ui.adapter.RecipeListAdapter.RecipeSelector;
@@ -52,25 +55,33 @@ public class RecipeListFragment extends Fragment implements RecipeSelector {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        networkModule = NetworkModule.getInstance();
-        
+        /*networkModule = NetworkModule.getInstance();
         final int hostActivityCode = getArguments().getInt(KEY_HOST_ACTIVITY_CODE);
-        final int appWidgetId = getArguments().getInt(KEY_APP_WIDGET_ID);
+        final int appWidgetId = getArguments().getInt(KEY_APP_WIDGET_ID);*/
         /*if (networkModule.getRecipes() == null) {
             adapter = new RecipeListAdapter(context, new ArrayList<Recipe>(), hostActivityCode);
         } else {
             adapter.setData(networkModule.getRecipes());
         }*/
-        adapter = new RecipeListAdapter(context, new ArrayList<Recipe>(), hostActivityCode, appWidgetId);
-        adapter.setData(networkModule.getRecipes());
+        /*adapter = new RecipeListAdapter(context, new ArrayList<Recipe>(), hostActivityCode, appWidgetId);
+        adapter.setData(networkModule.getRecipes());*/
     }
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-        
-        new FetchRecipesTask(networkModule, adapter).execute();
+        /*setRetainInstance(true);
+        new FetchRecipesTask(networkModule, adapter).execute();*/
+        networkModule = NetworkModule.getInstance();
+        final int hostActivityCode = getArguments().getInt(KEY_HOST_ACTIVITY_CODE);
+        final int appWidgetId = getArguments().getInt(KEY_APP_WIDGET_ID);
+        adapter = new RecipeListAdapter(getActivity(), new ArrayList<Recipe>(), hostActivityCode, appWidgetId);
+        RecipeListModel model =
+                ViewModelProvider
+                        .AndroidViewModelFactory
+                        .getInstance(getActivity().getApplication())
+                        .create(RecipeListModel.class);
+        adapter.setData(model.getRecipes());
     }
     
     @Nullable

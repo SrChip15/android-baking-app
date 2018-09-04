@@ -23,7 +23,8 @@ import timber.log.Timber;
 
 public final class NetworkModule {
 
-    private static final String REQUEST_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
+    private static final String REQUEST_URL =
+            "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
     private List<Recipe> recipes;
     @SuppressLint("StaticFieldLeak") private static NetworkModule networkModule;
 
@@ -84,8 +85,8 @@ public final class NetworkModule {
                 Timber.i("Connection successful! Response Code = %d, Response Message = %s",
                         connection.getResponseCode(), connection.getResponseMessage());
             }
-
-            @SuppressWarnings("UnusedAssignment") int bytesRead = 0;
+            
+            int bytesRead = 0;
             byte[] buffer = new byte[1024];
 
             while ((bytesRead = in.read(buffer)) > 0) { // 0 when there are no bytes to read,
