@@ -2,6 +2,7 @@ package com.android.kakashi.bakingapp.ui;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class RecipeListFragment extends Fragment implements RecipeSelector {
     
@@ -77,10 +79,8 @@ public class RecipeListFragment extends Fragment implements RecipeSelector {
         final int appWidgetId = getArguments().getInt(KEY_APP_WIDGET_ID);
         adapter = new RecipeListAdapter(getActivity(), new ArrayList<Recipe>(), hostActivityCode, appWidgetId);
         RecipeListModel model =
-                ViewModelProvider
-                        .AndroidViewModelFactory
-                        .getInstance(getActivity().getApplication())
-                        .create(RecipeListModel.class);
+                ViewModelProviders.of(getActivity()).get(RecipeListModel.class);
+        Timber.d("Total Number Of Recipes = %s",model.getRecipes().size());
         adapter.setData(model.getRecipes());
     }
     
@@ -90,7 +90,7 @@ public class RecipeListFragment extends Fragment implements RecipeSelector {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         ButterKnife.bind(this, view);
-        
+        adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

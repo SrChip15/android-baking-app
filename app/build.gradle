@@ -32,6 +32,7 @@ dependencies {
     implementation "com.jakewharton:butterknife:$butterKnifeVersion"
     implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
     implementation "android.arch.lifecycle:viewmodel:$lifecycleVersion"
 
     implementation "com.google.android.exoplayer:exoplayer-core:$exoPlayerVersion"
