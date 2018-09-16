@@ -65,7 +65,6 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull StepHolder holder, int position) {
-        //String textAtPositionFromTestData = data.get(position);
         Step current = data.get(position);
         holder.bind(current.getShortDescription());
     }

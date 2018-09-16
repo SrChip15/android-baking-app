@@ -1,50 +1,50 @@
 package com.android.kakashi.bakingapp;
 
+import android.annotation.SuppressLint;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 
 import com.android.kakashi.bakingapp.data.model.Recipe;
 import com.android.kakashi.bakingapp.data.network.NetworkModule;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import timber.log.Timber;
 
 public class RecipeListModel extends ViewModel {
-    private List<Recipe> recipes;
-    
-    public List<Recipe> getRecipes() {
-        if (recipes == null) {
-            recipes = new ArrayList<>();
-            loadRecipes(recipes);
-        }
-        
-        return recipes;
-    }
-    
-    private void loadRecipes(List<Recipe> recipes) {
-        new FetchRecipesTask(recipes).execute();
-    }
-    
-    /*
-    Asynchronous call to fetch recipes from remote location
-     */
-    class FetchRecipesTask extends AsyncTask<Void, Void, Void> {
-        
-        @SuppressWarnings("unused")
-        private List<Recipe> recipes;
-        
-        FetchRecipesTask(List<Recipe> recipes) {
-            this.recipes= recipes;
-        }
-        
-        @Override
-        protected Void doInBackground(Void... voids) {
-            Timber.d("Fetching Recipes...");
-            recipes = NetworkModule.fetchRecipes();
-            Timber.d("Recipes fetched = %s\nRequest filled", recipes.size());
-            return null;
-        }
-    }
+	private MutableLiveData<List<Recipe>> recipes;
+	private AsyncTask<Void, Void, List<Recipe>> recipeFetcher;
+	public LiveData<List<Recipe>> getRecipes() {
+		if (recipes == null) {
+			recipes = new MutableLiveData<>();
+			recipeFetcher = new FetchRecipesTask().execute();
+		}
+
+		return recipes;
+	}
+
+	@Override
+	protected void onCleared() {
+		super.onCleared();
+		recipeFetcher.cancel(true);
+		recipeFetcher = null;
+	}
+
+	/* Asynchronous call to fetch recipes from remote location */
+	@SuppressLint("StaticFieldLeak")
+	private class FetchRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
+
+		@Override
+		protected List<Recipe> doInBackground(Void... voids) {
+			Timber.d("Fetching Recipes...");
+			return NetworkModule.fetchRecipes();
+		}
+
+		@Override
+		protected void onPostExecute(List<Recipe> recipeList) {
+			recipes.setValue(recipeList);
+		}
+	}
 }

@@ -4,33 +4,34 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
+import com.android.kakashi.bakingapp.data.model.Recipe;
 import com.android.kakashi.bakingapp.ui.RecipeFragment;
 
 public class RecipeActivity extends ModularBaseActivity {
 
-    private static final String EXTRA_RECIPE_INDEX = "com.android.kakashi.bakingapp.extra_recipe_index";
+	private static final String EXTRA_RECIPE = "com.android.kakashi.bakingapp.extra_recipe";
 
-    public static Intent startActivity(Context packageContext, int recipePosition) {
-        Intent intent = new Intent(packageContext, RecipeActivity.class);
-        intent.putExtra(EXTRA_RECIPE_INDEX, recipePosition);
+	public static Intent startActivity(Context packageContext, Recipe recipe) {
+		Intent intent = new Intent(packageContext, RecipeActivity.class);
+		intent.putExtra(EXTRA_RECIPE, recipe);
 
-        return intent;
-    }
+		return intent;
+	}
 
-    @Override
-    public Fragment getFragment() {
-        int recipeIndex = getIntent().getIntExtra(EXTRA_RECIPE_INDEX, -1);
-        return RecipeFragment.newInstance(recipeIndex);
+	@Override
+	public Fragment getFragment() {
+		Recipe recipe = getIntent().getParcelableExtra(EXTRA_RECIPE);
+		return RecipeFragment.newInstance(recipe);
 
-    }
+	}
 
-    @SuppressWarnings("ConstantConditions")
-    public void setActionBarTitle(String title) {
-        getSupportActionBar().setTitle(title);
-    }
+	@SuppressWarnings("ConstantConditions")
+	public void setActionBarTitle(String title) {
+		getSupportActionBar().setTitle(title);
+	}
 
-    @SuppressWarnings("ConstantConditions")
-    public void setHomeAsUpEnabled(boolean showHomeAsUp) {
-        getSupportActionBar().setDisplayShowHomeEnabled(showHomeAsUp);
-    }
+	@SuppressWarnings("ConstantConditions")
+	public void setHomeAsUpEnabled(boolean showHomeAsUp) {
+		getSupportActionBar().setDisplayShowHomeEnabled(showHomeAsUp);
+	}
 }

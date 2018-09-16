@@ -2,43 +2,76 @@
 
 package com.android.kakashi.bakingapp.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class Ingredient {
+public class Ingredient implements Parcelable {
 
-    @SerializedName("quantity")
-    @Expose
-    private float quantity;
-    @SerializedName("measure")
-    @Expose
-    private String measure;
-    @SerializedName("ingredient")
-    @Expose
-    private String ingredient;
+	@SerializedName("quantity")
+	@Expose
+	private float quantity;
+	@SerializedName("measure")
+	@Expose
+	private String measure;
+	@SerializedName("ingredient")
+	@Expose
+	private String name;
 
-    public float getQuantity() {
-        return quantity;
-    }
+	protected Ingredient(Parcel in) {
+		quantity = in.readFloat();
+		measure = in.readString();
+		name = in.readString();
+	}
 
-    public void setQuantity(float quantity) {
-        this.quantity = quantity;
-    }
+	public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
+		@Override
+		public Ingredient createFromParcel(Parcel in) {
+			return new Ingredient(in);
+		}
 
-    public String getMeasure() {
-        return measure;
-    }
+		@Override
+		public Ingredient[] newArray(int size) {
+			return new Ingredient[size];
+		}
+	};
 
-    public void setMeasure(String measure) {
-        this.measure = measure;
-    }
+	public float getQuantity() {
+		return quantity;
+	}
 
-    public String getIngredient() {
-        return ingredient;
-    }
+	public void setQuantity(float quantity) {
+		this.quantity = quantity;
+	}
 
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
+	public String getMeasure() {
+		return measure;
+	}
+
+	public void setMeasure(String measure) {
+		this.measure = measure;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeFloat(quantity);
+		dest.writeString(measure);
+		dest.writeString(name);
+	}
 }
