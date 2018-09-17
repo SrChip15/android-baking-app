@@ -14,8 +14,10 @@ import java.util.List;
 import timber.log.Timber;
 
 public class RecipeListModel extends ViewModel {
+
 	private MutableLiveData<List<Recipe>> recipes;
 	private AsyncTask<Void, Void, List<Recipe>> recipeFetcher;
+
 	public LiveData<List<Recipe>> getRecipes() {
 		if (recipes == null) {
 			recipes = new MutableLiveData<>();
