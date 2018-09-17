@@ -63,7 +63,9 @@ public class RecipeFragment
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
-		((RecipeActivity) requireActivity()).setHomeAsUpEnabled(true);
+		if (context instanceof RecipeActivity) {
+			((RecipeActivity)requireActivity()).setHomeAsUpEnabled(true);
+		}
 	}
 
 	@Override
@@ -83,7 +85,9 @@ public class RecipeFragment
 		View view = inflater.inflate(R.layout.fragment_recipe, container, false);
 		ButterKnife.bind(this, view);
 
-		((RecipeActivity) requireActivity()).setActionBarTitle(recipe.getName());
+		if (requireActivity() instanceof RecipeActivity) {
+			((RecipeActivity) requireActivity()).setActionBarTitle(recipe.getName());
+		}
 
 		List<Ingredient> ingredients = recipe.getIngredients();
 		for (int i = 0; i < ingredients.size(); i++) {
