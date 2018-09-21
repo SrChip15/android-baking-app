@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BakingApp</string>
+    <string name="app_name">Baking App</string>
     <string name="ingredients_label">Ingredients</string>
     <string name="ingredients_line_item">\n%1$s: %2$.1f</string>
     <string name="steps_label">Steps</string>
