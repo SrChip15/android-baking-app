@@ -2,7 +2,6 @@ package com.android.kakashi.bakingapp.controller;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 
 import com.android.kakashi.bakingapp.R;
 import com.android.kakashi.bakingapp.data.model.Recipe;

@@ -7,4 +7,5 @@
     <string name="exo_controls_replay_description">Replay</string>
     <string name="sample_text">Baking Widget</string>
     <string name="widget_content_description">baking app widget</string>
+	<string name="recipe_image">Recipe Name</string>
 </resources>
