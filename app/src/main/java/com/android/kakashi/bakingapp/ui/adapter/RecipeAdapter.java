@@ -21,11 +21,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
 	private Context context;
 	private List<Recipe> recipes;
+	private RecipeClickListener recipeClickListener;
 
-	public RecipeAdapter(Context context, @NonNull List<Recipe> recipes) {
+	public interface RecipeClickListener {
+		void onRecipeClicked(Recipe recipe);
+	}
+
+	public RecipeAdapter(Context context, RecipeClickListener recipeClickListener, @NonNull List<Recipe> recipes) {
 		super();
 		this.context = context;
 		this.recipes = recipes;
+		this.recipeClickListener = recipeClickListener;
 	}
 
 	@NonNull
@@ -54,11 +60,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
 	public void setData(List<Recipe> recipes) {
 		this.recipes.clear();
-		this.recipes = recipes;
+		this.recipes.addAll(recipes);
 		notifyDataSetChanged();
 	}
 
-	class RecipeHolder extends RecyclerView.ViewHolder {
+	class RecipeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 		TextView recipeNameTextView;
 		TextView recipeServingSize;
@@ -68,6 +74,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
 		public RecipeHolder(View itemView) {
 			super(itemView);
+			itemView.setOnClickListener(this);
 
 			recipeNameTextView = itemView.findViewById(R.id.recipe_title);
 			recipeServingSize = itemView.findViewById(R.id.recipe_servings);
@@ -90,6 +97,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 			if (isInLandscapeMode) {
 				recipeServingsInfo.setText(String.format("Serves %s", servingsSizeAsText));
 			}
+		}
+
+		@Override
+		public void onClick(View v) {
+			recipeClickListener.onRecipeClicked(recipes.get(getAdapterPosition()));
 		}
 	}
 }

@@ -24,14 +24,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecipeListFragment extends Fragment {
+public class RecipeListFragment extends Fragment implements RecipeAdapter.RecipeClickListener {
 
 	@BindView(R.id.recycler_view)
 	RecyclerView recyclerView;
-	private RecipeClickListener recipeClickListener;
+	private Callback callback;
 
-	public interface RecipeClickListener {
-		void onRecipeItemClicked(Recipe recipe);
+	public interface Callback {
+		void recipeClicked(Recipe recipe);
 	}
 
 	public static RecipeListFragment newInstance() {
@@ -42,13 +42,12 @@ public class RecipeListFragment extends Fragment {
 		return fragment;
 	}
 
-	/**
-	 * @param context hosting activity
-	 */
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
-		recipeClickListener = (RecipeClickListener) context;
+
+		// Dependency - Hosting activity must implement callback interface
+		callback = (Callback) context;
 	}
 
 	@Nullable
@@ -60,7 +59,7 @@ public class RecipeListFragment extends Fragment {
 
 
 		final RecipeAdapter adapter =
-				new RecipeAdapter(requireActivity(), new ArrayList<Recipe>());
+				new RecipeAdapter(requireActivity(), this, new ArrayList<Recipe>());
 		final RecipeListModel model =
 				ViewModelProviders.of(requireActivity()).get(RecipeListModel.class);
 
@@ -71,7 +70,6 @@ public class RecipeListFragment extends Fragment {
 		));
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setAdapter(adapter);
-
 
 		final Observer<List<Recipe>> listObserver = new Observer<List<Recipe>>() {
 			@Override
@@ -88,8 +86,7 @@ public class RecipeListFragment extends Fragment {
 	}
 
 	@Override
-	public void onDetach() {
-		super.onDetach();
-		recipeClickListener = null;
+	public void onRecipeClicked(Recipe recipe) {
+		callback.recipeClicked(recipe);
 	}
 }

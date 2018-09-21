@@ -64,7 +64,7 @@ public class RecipeFragment
 	public void onAttach(Context context) {
 		super.onAttach(context);
 		if (context instanceof RecipeActivity) {
-			((RecipeActivity)requireActivity()).setHomeAsUpEnabled(true);
+			((RecipeActivity) requireActivity()).setHomeAsUpEnabled(true);
 		}
 	}
 
@@ -111,6 +111,7 @@ public class RecipeFragment
 	/**
 	 * The below interface method from StepAdapter is devised to inform the adapter powering the
 	 * RecyclerView in the fragment_recipe.xml displaying all the recipe steps.
+	 *
 	 * @param position an integer denoting the position of the step being clicked in the list of steps
 	 */
 	@Override
