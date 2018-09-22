@@ -71,6 +71,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 		ImageView recipeImage;
 		TextView recipeServingsInfo;
 		boolean isInLandscapeMode;
+		boolean isTablet;
 
 		public RecipeHolder(View itemView) {
 			super(itemView);
@@ -80,8 +81,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 			recipeServingSize = itemView.findViewById(R.id.recipe_servings);
 			recipeImage = itemView.findViewById(R.id.recipe_image);
 
-			if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-				isInLandscapeMode = true;
+			isInLandscapeMode = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+			isTablet = context.getResources().getBoolean(R.bool.isTablet);
+			if (isInLandscapeMode && !isTablet) {
 				recipeServingsInfo = itemView.findViewById(R.id.recipe_servings_info);
 			}
 		}
@@ -94,7 +96,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 					.load(videoUrl)
 					.into(recipeImage);
 
-			if (isInLandscapeMode) {
+			if (isInLandscapeMode && !isTablet) {
 				recipeServingsInfo.setText(String.format("Serves %s", servingsSizeAsText));
 			}
 		}
