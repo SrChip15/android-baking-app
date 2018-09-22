@@ -94,7 +94,8 @@ public class RecipeFragment
 			Ingredient ingredient = ingredients.get(i);
 			String name = ingredient.getName();
 			float quantity = ingredient.getQuantity();
-			ingredientsTextView.append(getString(R.string.ingredients_line_item, name, quantity));
+			String ingredientText = getString(R.string.ingredients_line_item, (i + 1), name, quantity, ingredient.getMeasure());
+			ingredientsTextView.append(ingredientText);
 		}
 
 		stepsRecyclerView.setHasFixedSize(true);

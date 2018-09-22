@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Baking App</string>
     <string name="ingredients_label">Ingredients</string>
-    <string name="ingredients_line_item">\n%1$s: %2$.1f</string>
+    <string name="ingredients_line_item">\n%1$d. %2$s: %3$.1f %4$s</string>
     <string name="steps_label">Steps</string>
     <string name="description_label_tv">Description</string>
     <string name="exo_controls_replay_description">Replay</string>
