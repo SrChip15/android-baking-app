@@ -14,65 +14,63 @@ import java.util.List;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
-    private OnItemClickListener itemClickListener;
+	private OnItemClickListener itemClickListener;
 
-    public interface OnItemClickListener {
-        void onItemClicked(int position);
-    }
+	public interface OnItemClickListener {
+		void onItemClicked(int position);
+	}
 
-    static class StepHolder
-            extends RecyclerView.ViewHolder
-            implements View.OnClickListener {
+	static class StepHolder
+			extends RecyclerView.ViewHolder
+			implements View.OnClickListener {
 
-        TextView stepShortDescriptionTextView;
-        OnItemClickListener itemClickListener;
+		TextView stepShortDescriptionTextView;
+		OnItemClickListener itemClickListener;
 
-        StepHolder(View itemView, OnItemClickListener itemClickListener) {
-            super(itemView);
-            this.itemClickListener = itemClickListener;
-            stepShortDescriptionTextView = (TextView) itemView;
-            itemView.setOnClickListener(this);
-        }
+		StepHolder(View itemView, OnItemClickListener itemClickListener) {
+			super(itemView);
+			this.itemClickListener = itemClickListener;
+			stepShortDescriptionTextView = (TextView) itemView;
+			itemView.setOnClickListener(this);
+		}
 
-        private void bind(String itemText) {
-            stepShortDescriptionTextView.setText(itemText);
-        }
+		private void bind(String itemText) {
+			stepShortDescriptionTextView.setText(itemText);
+		}
 
-        @Override
-        public void onClick(View v) {
-            itemClickListener.onItemClicked(getAdapterPosition());
-        }
-    }
+		@Override
+		public void onClick(View v) {
+			itemClickListener.onItemClicked(getAdapterPosition());
+		}
+	}
 
-    private Context context;
-    private List<Step> data;
+	private Context context;
+	private List<Step> data;
 
-    @SuppressWarnings("WeakerAccess")
-    public StepAdapter(Context context, OnItemClickListener itemClickListener, List<Step> data) {
-        this.context = context;
-        this.itemClickListener = itemClickListener;
-        this.data = data;
-    }
+	public StepAdapter(Context context, OnItemClickListener itemClickListener, List<Step> data) {
+		this.context = context;
+		this.itemClickListener = itemClickListener;
+		this.data = data;
+	}
 
-    @NonNull
-    @Override
-    public StepHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context)
-                .inflate(android.R.layout.simple_list_item_1, parent, false);
+	@NonNull
+	@Override
+	public StepHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		View itemView = LayoutInflater.from(context)
+				                .inflate(android.R.layout.simple_list_item_1, parent, false);
 
-        return new StepHolder(itemView, itemClickListener);
-    }
+		return new StepHolder(itemView, itemClickListener);
+	}
 
-    @Override
-    public void onBindViewHolder(@NonNull StepHolder holder, int position) {
-        Step step = data.get(position);
-        String stepDescription = String.valueOf(position + 1) + ". " + step.getShortDescription();
-        holder.bind(stepDescription);
-    }
+	@Override
+	public void onBindViewHolder(@NonNull StepHolder holder, int position) {
+		Step step = data.get(position);
+		String stepDescription = position == 0 ? step.getDescription() : position + ". " + step.getShortDescription();
+		holder.bind(stepDescription);
+	}
 
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
-
+	@Override
+	public int getItemCount() {
+		return data.size();
+	}
 }
