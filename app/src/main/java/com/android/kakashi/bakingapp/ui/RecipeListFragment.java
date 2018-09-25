@@ -26,7 +26,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecipeListFragment extends Fragment implements RecipeAdapter.RecipeClickListener {
+public class RecipeListFragment
+		extends Fragment
+		implements RecipeAdapter.RecipeClickListener {
 
 	@BindView(R.id.recycler_view)
 	RecyclerView recyclerView;

@@ -1,7 +1,6 @@
 package com.android.kakashi.bakingapp.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -36,8 +35,13 @@ public class RecipeFragment
 	@BindView(R.id.steps_rv)
 	RecyclerView stepsRecyclerView;
 	private Recipe recipe;
+	private Callback callback;
 
 	private static final String ARG_RECIPE = "recipe";
+
+	public interface Callback {
+		void onStepSelected(int stepPosition, Recipe recipe);
+	}
 
 	public static RecipeFragment newInstance(Recipe recipe) {
 		Bundle args = new Bundle();
@@ -49,6 +53,17 @@ public class RecipeFragment
 	}
 
 	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		if (context instanceof RecipeActivity) {
+			((RecipeActivity) requireActivity()).setHomeAsUpEnabled(true);
+		}
+
+		// Dependency - Hosting activity must implement callback interface
+		callback = (Callback) context;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true); // handle activity up navigation
@@ -57,14 +72,6 @@ public class RecipeFragment
 			recipe = getArguments().getParcelable(ARG_RECIPE);
 		} else {
 			throw new IllegalArgumentException("ERROR! Recipe missing!");
-		}
-	}
-
-	@Override
-	public void onAttach(Context context) {
-		super.onAttach(context);
-		if (context instanceof RecipeActivity) {
-			((RecipeActivity) requireActivity()).setHomeAsUpEnabled(true);
 		}
 	}
 
@@ -117,7 +124,6 @@ public class RecipeFragment
 	 */
 	@Override
 	public void onItemClicked(int position) {
-		Intent stepPager = StepPagerActivity.start(getActivity(), position, recipe);
-		startActivity(stepPager);
+		callback.onStepSelected(position, recipe);
 	}
 }
