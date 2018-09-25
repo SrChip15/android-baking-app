@@ -2,7 +2,10 @@ package com.android.kakashi.bakingapp.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
 import com.android.kakashi.bakingapp.R;
 import com.android.kakashi.bakingapp.data.model.Recipe;
@@ -31,7 +34,26 @@ public class RecipeActivity extends ModularBaseActivity implements RecipeFragmen
 	public Fragment getFragment() {
 		Recipe recipe = getIntent().getParcelableExtra(EXTRA_RECIPE);
 		return RecipeFragment.newInstance(recipe);
+	}
 
+	@Override
+	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		if (findViewById(R.id.detail_fragment_container) != null) {
+			// Tablet mode; Show recipe introduction in detail screen portion
+			FragmentManager fm = getSupportFragmentManager();
+			Fragment detailFragment = fm.findFragmentById(R.id.detail_fragment_container);
+
+			if (detailFragment == null) {
+				Recipe recipe = getIntent().getParcelableExtra(EXTRA_RECIPE);
+				Fragment fragment = StepFragment.newInstance(recipe.getSteps().get(0));
+
+				fm.beginTransaction()
+						.add(R.id.detail_fragment_container, fragment)
+						.commit();
+			}
+		}
 	}
 
 	@SuppressWarnings("ConstantConditions")

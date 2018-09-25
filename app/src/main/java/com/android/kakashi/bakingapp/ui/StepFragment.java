@@ -1,5 +1,6 @@
 package com.android.kakashi.bakingapp.ui;
 
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -76,6 +77,12 @@ public class StepFragment extends Fragment {
 		super.onResume();
 		if ((Util.SDK_INT <= 23 || player == null)) {
 			setVideoPlayer();
+		}
+
+		// Enable lean back mode in landscape
+		//noinspection StatementWithEmptyBody
+		if (requireActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			// TODO: 2018-09-25 explore with lean back mode for video playback
 		}
 	}
 
