@@ -5,7 +5,12 @@
 		<!-- Customize your theme here. -->
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="actionBarStyle">@style/BakingAppBar</item>
 		<item name="colorAccent">@color/colorAccent</item>
+	</style>
+
+	<style name="BakingAppBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+		<item name="elevation">0dp</item>
 	</style>
 
 	<style name="ExoMediaButton.Replay">

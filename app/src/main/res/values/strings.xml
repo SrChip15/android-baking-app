@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">Baking App</string>
-    <string name="ingredients_label">Ingredients</string>
-    <string name="ingredients_line_item">%1$d. %2$s: %3$.1f %4$s\n</string>
-    <string name="steps_label">Steps</string>
-    <string name="description_label_tv">Description</string>
-    <string name="exo_controls_replay_description">Replay</string>
-    <string name="sample_text">Baking Widget</string>
-    <string name="widget_content_description">baking app widget</string>
+	<string name="app_name">Baking App</string>
+	<string name="ingredients_label">Ingredients</string>
+	<string name="ingredients_line_item">%1$d. %2$s: %3$.1f %4$s\n</string>
+	<string name="steps_label">Steps</string>
+	<string name="description_label_tv">Description</string>
+	<string name="exo_controls_replay_description">Replay</string>
+	<string name="sample_text">Baking Widget</string>
+	<string name="widget_content_description">baking app widget</string>
 	<string name="recipe_image">Recipe Name</string>
+    <string name="step_pager_title">STEP %d</string>
+	<string name="intro_pager_title">INTRO</string>
 </resources>

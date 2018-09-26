@@ -66,6 +66,14 @@ public class StepPagerActivity extends AppCompatActivity {
 			public int getCount() {
 				return steps.size();
 			}
+
+			@Nullable
+			@Override
+			public CharSequence getPageTitle(int position) {
+				String stepTitle = getString(R.string.step_pager_title, position);
+				String introTitle = getString(R.string.intro_pager_title);
+				return position > 0 ? stepTitle : introTitle;
+			}
 		});
 
 		stepPager.setCurrentItem(currentIndex);
