@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -81,8 +82,12 @@ public class StepFragment extends Fragment {
 
 		// Enable lean back mode in landscape
 		//noinspection StatementWithEmptyBody
-		if (requireActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			// TODO: 2018-09-25 explore with lean back mode for video playback
+		boolean isTabletMode = getResources().getBoolean(R.bool.isTablet);
+		if (requireActivity().getResources()
+				    .getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE &&
+				!isTabletMode) {
+			expandVideoView(playerView);
+			hideSystemUI();
 		}
 	}
 
@@ -116,6 +121,11 @@ public class StepFragment extends Fragment {
 		stepDescriptionTextView.setText(description);
 
 		return view;
+	}
+
+	private void expandVideoView(PlayerView playerView) {
+		playerView.getLayoutParams().height = LayoutParams.MATCH_PARENT;
+		playerView.getLayoutParams().width = LayoutParams.MATCH_PARENT;
 	}
 
 	private void initializePlayer() {
@@ -174,5 +184,15 @@ public class StepFragment extends Fragment {
 			player.release();
 			player = null;
 		}
+	}
+
+	private void hideSystemUI() {
+		requireActivity().getWindow().getDecorView().setSystemUiVisibility(
+				View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+						| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+						| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+						| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+						| View.SYSTEM_UI_FLAG_FULLSCREEN
+						| View.SYSTEM_UI_FLAG_IMMERSIVE);
 	}
 }
