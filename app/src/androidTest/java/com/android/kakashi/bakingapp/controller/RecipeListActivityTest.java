@@ -1,6 +1,7 @@
 package com.android.kakashi.bakingapp.controller;
 
 import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -27,12 +28,10 @@ public class RecipeListActivityTest {
 
 	@Test
 	public void clickOnRecyclerViewItem_opensRecipeActivity() {
-
 		onView(withId(R.id.recycler_view))
 				.perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
 
 		onView(withId(R.id.ingredients_label_tv))
 				.check(matches(isDisplayed()));
 	}
-
 }
