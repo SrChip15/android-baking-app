@@ -5,9 +5,12 @@ package com.android.kakashi.bakingapp.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -114,5 +117,22 @@ public class Recipe implements Parcelable {
 		dest.writeTypedList(steps);
 		dest.writeInt(servings);
 		dest.writeString(image);
+	}
+
+	/**
+	 * Helper method to flatten a Recipe object into a String
+	 * @return String flattened list of ingredients of recipe
+	 */
+	public String flatten() {
+		return new Gson().toJson(this);
+	}
+
+	/**
+	 * Helper method to remake a Recipe object from a flattened one that exists as a String
+	 * @return Recipe a recipe object
+	 */
+	public static Recipe remake(String recipeAsString) {
+		Type type = new TypeToken<Recipe>(){}.getType();
+		return new Gson().fromJson(recipeAsString, type);
 	}
 }

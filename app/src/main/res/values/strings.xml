@@ -10,4 +10,6 @@
 	<string name="recipe_image">Recipe Name</string>
     <string name="step_pager_title">STEP %d</string>
 	<string name="intro_pager_title">INTRO</string>
+	<string name="widget_recipe_name_key">widgetRecipeKey</string>
+	<string name="add_to_widget">Add to Widget</string>
 </resources>

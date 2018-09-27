@@ -4,11 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ import com.android.kakashi.bakingapp.data.model.Ingredient;
 import com.android.kakashi.bakingapp.data.model.Recipe;
 import com.android.kakashi.bakingapp.ui.adapter.StepAdapter;
 import com.android.kakashi.bakingapp.ui.adapter.StepAdapter.OnItemClickListener;
+import com.android.kakashi.bakingapp.widget.WidgetService;
 
 import java.util.List;
 
@@ -76,10 +80,19 @@ public class RecipeFragment
 	}
 
 	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.recipe, menu);
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int i = item.getItemId();
 		if (i == android.R.id.home) {
 			NavUtils.navigateUpFromSameTask(requireActivity());
+			return true;
+		} else if (i == R.id.action_add_widget) {
+			WidgetService.updateWidget(requireActivity(), recipe);
+			Snackbar.make(getView(), "Recipe added to widget", Snackbar.LENGTH_SHORT).show();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
