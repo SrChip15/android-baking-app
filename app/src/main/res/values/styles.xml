@@ -13,9 +13,18 @@
 		<item name="elevation">0dp</item>
 	</style>
 
+	<!-- Exoplayer styles -->
 	<style name="ExoMediaButton.Replay">
 		<item name="android:src">@drawable/exo_controls_replay</item>
 		<item name="android:contentDescription">@string/exo_controls_replay_description</item>
+	</style>
+
+	<style name="ExoplayerTimeBar">
+		<item name="android:textColor">@color/playbackTimeBarTextColor</item>
+		<item name="android:textSize">@dimen/playback_timebar_text_size</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:paddingStart">@dimen/playback_timebar_text_left_padding</item>
+		<item name="android:paddingEnd">@dimen/playback_timebar_text_left_padding</item>
 	</style>
 
 </resources>

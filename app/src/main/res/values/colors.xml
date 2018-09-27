@@ -4,4 +4,16 @@
 	<color name="colorPrimaryDark">#303F9F</color>
 	<color name="colorAccent">#FF4081</color>
 	<color name="recipeSelector">#7280CE</color>
+	<color name="pagerTitleStripText">#fff</color>
+	<color name="ingredientBoxListText">@android:color/white</color>
+	<color name="widgetRecipeNameTextColor">#fff</color>
+	<color name="widgetListViewBackground">@android:color/holo_orange_light</color>
+	<color name="widgetListViewDivider">@android:color/white</color>
+
+	<!-- List Item Recipe Text Info -->
+	<color name="recipeCardTextInfoTextColor">@android:color/black</color>
+
+	<!-- Exoplayer Playback Controls -->
+	<color name="playbackBackground">#CC000000</color>
+	<color name="playbackTimeBarTextColor">#FFBEBEBE</color>
 </resources>

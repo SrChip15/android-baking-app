@@ -5,11 +5,11 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/card_view"
 	android:layout_width="match_parent"
-	android:layout_height="250dp"
-	android:layout_margin="16dp"
+	android:layout_height="@dimen/recipe_card_height"
+	android:layout_margin="@dimen/recipe_card_all_margins"
 	android:foreground="?android:attr/selectableItemBackground"
-	card_view:cardCornerRadius="4dp"
-	card_view:cardElevation="4dp">
+	card_view:cardCornerRadius="@dimen/recipe_card_corner_radius"
+	card_view:cardElevation="@dimen/recipe_card_elevation">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -17,7 +17,7 @@
 		android:orientation="horizontal">
 
 		<FrameLayout
-			android:layout_width="350dp"
+			android:layout_width="@dimen/recipe_card_image_height"
 			android:layout_height="match_parent">
 
 			<ImageView
@@ -33,10 +33,10 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="end"
-				android:drawablePadding="4dp"
 				android:drawableStart="@drawable/ic_serving_size"
-				android:paddingEnd="4dp"
-				android:paddingStart="4dp"
+				android:drawablePadding="@dimen/recipe_card_servings_drawable_padding"
+				android:paddingStart="@dimen/recipe_card_servings_right_padding"
+				android:paddingEnd="@dimen/recipe_card_servings_left_padding"
 				android:textStyle="bold"
 				tools:text="8"
 				tools:textColor="black" />
@@ -48,7 +48,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:orientation="vertical"
-			android:padding="8dp">
+			android:padding="@dimen/recipe_card_text_info">
 
 			<TextView
 				android:id="@+id/recipe_title"
@@ -57,10 +57,10 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="bottom"
 				android:fontFamily="sans-serif-smallcaps"
-				android:padding="4dp"
-				android:textSize="24sp"
-				tools:text="Recipe Name"
-				android:textColor="@android:color/black"/>
+				android:padding="@dimen/recipe_card_text_info_title_padding"
+				android:textColor="@color/recipeCardTextInfoTextColor"
+				android:textSize="@dimen/recipe_card_text_info_title_text_size"
+				tools:text="Recipe Name" />
 
 			<TextView
 				android:id="@+id/recipe_servings_info"
@@ -69,10 +69,10 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="bottom"
 				android:fontFamily="sans-serif"
-				android:padding="4dp"
-				android:textSize="16sp"
-				android:textColor="@android:color/black"
-				tools:text="Serves 8"/>
+				android:padding="@dimen/recipe_card_text_info_servings_padding"
+				android:textColor="@color/recipeCardTextInfoTextColor"
+				android:textSize="@dimen/recipe_card_text_info_servings_text_size"
+				tools:text="Serves 8" />
 
 		</LinearLayout>
 

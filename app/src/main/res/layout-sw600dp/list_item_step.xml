@@ -10,38 +10,37 @@
 	<com.google.android.exoplayer2.ui.PlayerView
 		android:id="@+id/step_video_player"
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="16dp"
-		android:layout_marginEnd="16dp"
-		android:layout_marginBottom="16dp"
-		android:layout_weight="3"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/step_video_player_horizontal_margin"
+		android:layout_marginTop="@dimen/step_video_player_vertical_margin"
+		android:layout_marginEnd="@dimen/step_video_player_horizontal_margin"
+		android:layout_marginBottom="@dimen/step_video_player_vertical_margin"
 		app:fastforward_increment="2000"
 		app:rewind_increment="2000" />
 
 	<TextView
 		android:id="@+id/textView"
-		android:layout_width="wrap_content"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="8dp"
-		android:layout_marginEnd="16dp"
-		android:layout_marginBottom="8dp"
+		android:layout_marginStart="@dimen/step_desc_label_horizontal_margin"
+		android:layout_marginTop="@dimen/step_desc_label_vertical_margin"
+		android:layout_marginEnd="@dimen/step_desc_label_horizontal_margin"
+		android:layout_marginBottom="@dimen/step_desc_label_vertical_margin"
 		android:fontFamily="sans-serif-medium"
 		android:text="@string/description_label_tv"
 		android:textColor="@color/colorPrimaryDark"
-		android:textSize="18sp" />
+		android:textSize="@dimen/step_desc_label_text_size" />
 
 	<TextView
 		android:id="@+id/step_description_tv"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:layout_marginStart="16dp"
-		android:layout_marginEnd="16dp"
-		android:layout_marginBottom="16dp"
+		android:layout_marginStart="@dimen/step_desc_horizontal_margin"
+		android:layout_marginEnd="@dimen/step_desc_horizontal_margin"
+		android:layout_marginBottom="@dimen/step_desc_bottom_margin"
 		android:layout_weight="2"
 		android:fontFamily="sans-serif-light"
-		android:textSize="24sp"
+		android:textSize="@dimen/step_desc_text_size"
 		tools:text="Step Description" />
 
 </LinearLayout>

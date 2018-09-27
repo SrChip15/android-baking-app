@@ -14,12 +14,12 @@
 		android:background="@color/colorPrimary"
 		android:contentDescription="@string/widget_content_description"
 		android:fontFamily="sans-serif-smallcaps"
-		android:paddingStart="16dp"
-		android:paddingTop="4dp"
-		android:paddingEnd="16dp"
-		android:paddingBottom="4dp"
-		android:textColor="#ffffff"
-		android:textSize="24sp"
+		android:paddingStart="@dimen/widget_recipe_name_horizontal_margin"
+		android:paddingTop="@dimen/widget_recipe_name_vertical_margin"
+		android:paddingEnd="@dimen/widget_recipe_name_horizontal_margin"
+		android:paddingBottom="@dimen/widget_recipe_name_vertical_margin"
+		android:textColor="@color/widgetRecipeNameTextColor"
+		android:textSize="@dimen/widget_recipe_name_text_size"
 		android:textStyle="normal" />
 
 	<ListView
@@ -28,7 +28,7 @@
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:background="@android:color/holo_orange_light"
-		android:divider="@android:color/white"
+		android:divider="@color/widgetListViewDivider"
 		android:dividerHeight="1dp" />
 
 </LinearLayout>

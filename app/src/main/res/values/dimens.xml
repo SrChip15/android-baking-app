@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="pager_title_strip_padding">4dp</dimen>
+
+	<!-- Recipe Fragment Ingredient box -->
+	<dimen name="ingredients_box_height">280dp</dimen>
+	<dimen name="ingredient_box_horizontal_margin">16dp</dimen>
+	<dimen name="ingredient_box_top_margin">16dp</dimen>
+	<dimen name="ingredient_box_horizontal_padding">8dp</dimen>
+	<dimen name="ingredient_box_label_left_padding">16dp</dimen>
+	<dimen name="ingredient_box_label_right_padding">8dp</dimen>
+	<dimen name="ingredient_box_label_top_margin">8dp</dimen>
+	<dimen name="ingredient_box_label_text_size">24sp</dimen>
+	<dimen name="ingredient_box_list_left_margin">8dp</dimen>
+	<dimen name="ingredient_box_list_line_spacing">2dp</dimen>
+	<dimen name="ingredient_box_list_top_padding">8dp</dimen>
+	<dimen name="ingredient_box_list_auto_text_max_size">16sp</dimen>
+	<dimen name="ingredient_box_list_auto_text_min_size">14sp</dimen>
+	<dimen name="ingredient_box_steps_top_margin">24dp</dimen>
+	<dimen name="ingredient_box_steps_left_padding">8dp</dimen>
+	<dimen name="ingredient_box_steps_right_padding">8dp</dimen>
+
+	<!-- Exoplayer Playback Controls -->
+	<dimen name="playback_controls_top_padding">4dp</dimen>
+	<dimen name="playback_timebar_top_margin">4dp</dimen>
+	<dimen name="playback_timebar_text_size">14sp</dimen>
+	<dimen name="playback_timebar_text_left_padding">4dp</dimen>
+	<dimen name="playback_timebar_text_right_padding">4dp</dimen>
+	<dimen name="playback_timebar_height">26dp</dimen>
+
+	<!-- List Item Recipe (Generic) dimens -->
+	<dimen name="recipe_card_height">250dp</dimen>
+	<dimen name="recipe_card_all_margins">4dp</dimen>
+	<dimen name="recipe_card_corner_radius">4dp</dimen>
+	<dimen name="recipe_card_elevation">4dp</dimen>
+	<dimen name="recipe_card_title_all_padding">4dp</dimen>
+	<dimen name="recipe_card_title_text_size">32sp</dimen>
+	<dimen name="recipe_card_servings_drawable_padding">4dp</dimen>
+	<dimen name="recipe_card_servings_right_padding">4dp</dimen>
+	<dimen name="recipe_card_servings_left_padding">4dp</dimen>
+
+	<!-- List Item Recipe (Mobile-Landscape) -->
+	<dimen name="recipe_card_image_height">350dp</dimen>
+	<dimen name="recipe_card_text_info">8dp</dimen>
+	<dimen name="recipe_card_text_info_title_padding">4dp</dimen>
+	<dimen name="recipe_card_text_info_title_text_size">24sp</dimen>
+	<dimen name="recipe_card_text_info_servings_padding">4dp</dimen>
+	<dimen name="recipe_card_text_info_servings_text_size">16sp</dimen>
+
+	<!-- List Item Step (Generic) -->
+	<dimen name="step_video_player_horizontal_margin">16dp</dimen>
+	<dimen name="step_video_player_vertical_margin">8dp</dimen>
+	<dimen name="step_desc_label_horizontal_margin">16dp</dimen>
+	<dimen name="step_desc_label_vertical_margin">8dp</dimen>
+	<dimen name="step_desc_label_text_size">18sp</dimen>
+	<dimen name="step_desc_horizontal_margin">16dp</dimen>
+	<dimen name="step_desc_bottom_margin">16dp</dimen>
+	<dimen name="step_desc_text_size">24sp</dimen>
+
+	<!-- Widget dims -->
+	<dimen name="widget_recipe_name_horizontal_margin">16dp</dimen>
+	<dimen name="widget_recipe_name_vertical_margin">4dp</dimen>
+	<dimen name="widget_recipe_name_text_size">24sp</dimen>
+</resources>

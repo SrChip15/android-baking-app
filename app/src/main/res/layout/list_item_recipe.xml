@@ -5,11 +5,11 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/card_view"
 	android:layout_width="match_parent"
-	android:layout_height="250dp"
-	android:layout_margin="4dp"
+	android:layout_height="@dimen/recipe_card_height"
+	android:layout_margin="@dimen/recipe_card_all_margins"
 	android:foreground="?android:attr/selectableItemBackground"
-	card_view:cardCornerRadius="4dp"
-	card_view:cardElevation="4dp">
+	card_view:cardCornerRadius="@dimen/recipe_card_corner_radius"
+	card_view:cardElevation="@dimen/recipe_card_elevation">
 
 	<FrameLayout
 		android:layout_width="match_parent"
@@ -29,10 +29,10 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"
 			android:fontFamily="sans-serif-smallcaps"
-			android:padding="4dp"
-			android:textSize="32sp"
+			android:padding="@dimen/recipe_card_title_all_padding"
+			android:textSize="@dimen/recipe_card_title_text_size"
 			tools:text="Recipe Name"
-			tools:textColor="black"/>
+			tools:textColor="black" />
 
 		<TextView
 			android:id="@+id/recipe_servings"
@@ -40,10 +40,10 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="end"
-			android:drawablePadding="4dp"
 			android:drawableStart="@drawable/ic_serving_size"
-			android:paddingEnd="4dp"
-			android:paddingStart="4dp"
+			android:drawablePadding="@dimen/recipe_card_servings_drawable_padding"
+			android:paddingStart="@dimen/recipe_card_servings_left_padding"
+			android:paddingEnd="@dimen/recipe_card_servings_right_padding"
 			android:textStyle="bold"
 			tools:text="8"
 			tools:textColor="black" />
